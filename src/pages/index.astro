@@ -1,0 +1,487 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VectorProps from '../components/VectorProps.astro';
+import '../styles/global.css';
+
+import scene01Svg from '../assets/svg/scene-01-intro.svg?raw';
+import scene02Svg from '../assets/svg/scene-02-acto1.svg?raw';
+import scene03Svg from '../assets/svg/scene-03-acto2.svg?raw';
+import scene04Svg from '../assets/svg/scene-04-acto3.svg?raw';
+import scene05Svg from '../assets/svg/scene-05-acto4.svg?raw';
+import scene06Svg from '../assets/svg/scene-06-outro.svg?raw';
+
+const stats = [
+  { label: 'LEALTAD INQUEBRANTABLE', value: '100%' },
+  { label: 'CORAJE SIN FRONTERAS', value: '100%' },
+  { label: 'RESILIENCIA DE ACERO', value: '100%' },
+  { label: 'AMOR DE MADRE', value: '∞%' },
+];
+---
+
+<BaseLayout title="GTA: MAMÁ — Corina (Edición Leyenda)">
+  <div class="gta-atmosphere-overlay" aria-hidden="true"></div>
+
+  <!-- Rockstar-Style Fixed HUD -->
+  <header class="gta-hud">
+    <div class="hud-badge">
+      <span class="hud-badge-dot"></span>
+      <span class="hud-title">CORINA • NIVEL 58 • EDICIÓN LEYENDA</span>
+    </div>
+    <div class="hud-stars-wrap">
+      <VectorProps type="gta-star-rating" />
+    </div>
+  </header>
+
+  <!-- Quick Chapter Navigation (Ideal for TV / Laptop / Touch) -->
+  <nav class="chapter-nav" aria-label="Capítulos de la historia">
+    <button class="chapter-dot is-active" data-target="#intro" title="Intro: GTA Mamá" aria-label="Ir a Intro"></button>
+    <button class="chapter-dot" data-target="#acto-1" title="Acto I: Nadie se queda atrás" aria-label="Ir a Acto I"></button>
+    <button class="chapter-dot" data-target="#acto-2" title="Acto II: Salto sin red" aria-label="Ir a Acto II"></button>
+    <button class="chapter-dot" data-target="#acto-3" title="Acto III: Inquebrantable" aria-label="Ir a Acto III"></button>
+    <button class="chapter-dot" data-target="#acto-4" title="Acto IV: Creando Vida con Hilos" aria-label="Ir a Acto IV"></button>
+    <button class="chapter-dot" data-target="#outro" title="Misión de Mañana: Celebrar" aria-label="Ir a Carta Final"></button>
+  </nav>
+
+  <main>
+    <!-- ==========================================
+         CAPÍTULO 00 — INTRO: GTA MAMÁ (EDICIÓN LEYENDA)
+         ========================================== -->
+    <section id="intro" class="hero-section" data-chapter="intro">
+      <div class="hero-bg-aura" aria-hidden="true"></div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="gta-kicker">ROCKSTAR MOM PRESENTS • DÍA DE LA MADRE</span>
+          <h1 class="gta-main-title">
+            GTA: <span>CORINA</span>
+          </h1>
+          <p class="gta-subtitle">
+            Hay personas que juegan la vida en modo fácil, y hay madres como vos que entran directo en <strong>Modo Leyenda</strong>: sin abandonar jamás a los suyos, cruzando fronteras y convirtiendo cada prueba imposible en una victoria.
+          </p>
+
+          <div class="gta-stats-grid" role="list" aria-label="Estadísticas de Corina">
+            {stats.map((stat) => (
+              <div class="stat-card" role="listitem">
+                <div class="stat-header">
+                  <span>{stat.label}</span>
+                  <span>{stat.value}</span>
+                </div>
+                <div class="stat-bar-track">
+                  <div class="stat-bar-fill"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <a href="#acto-1" class="gta-cta-btn">
+            <span>INICIAR MISIONES DE VIDA</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="hero-visual">
+          <div class="gta-poster-frame" data-poster>
+            <div class="svg-stage" set:html={scene01Svg} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ACTO I — NADIE SE QUEDA ATRÁS (PERÚ / FIBIO)
+         ========================================== -->
+    <section id="acto-1" class="story-act" data-chapter="acto-1">
+      <div class="act-container">
+        <div class="act-visual">
+          <div class="gta-poster-frame" data-poster>
+            <div class="svg-stage" set:html={scene02Svg} />
+            <div class="poster-prop-floating prop-bottom-left">
+              <VectorProps type="ecg-monitor" />
+            </div>
+          </div>
+        </div>
+
+        <article class="act-card">
+          <div class="act-mission-tag">MISIÓN 01 • LEALTAD ABSOLUTA</div>
+          <p class="act-location">📍 PERÚ • EL MILAGRO DE NO SOLTAR LA MANO</p>
+          <h2 class="act-heading">NADIE SE QUEDA ATRÁS</h2>
+          <p class="act-narrative">
+            Cuando mi papá sufrió aquel ACV que le paralizó la mitad del cuerpo, el diagnóstico médico decía que nunca más iba a volver a caminar. Incluso hubo quienes te decían que lo dejes, que era una carga demasiado pesada.
+          </p>
+          <p class="act-narrative">
+            Pero ellos <strong>no te conocían</strong>. Te quedaste firme a su lado, moviste cielo y tierra, y a pura paciencia y perseverancia lograste lo que parecía imposible: hoy las secuelas son mínimas y él camina a la par tuya porque vos jamás le soltaste la mano.
+          </p>
+          <div class="mission-reward-box">
+            <span class="reward-label">LOGRO DESBLOQUEADO</span>
+            <span class="reward-value">+1000 RESPETO • MILAGRO EN MOVIMIENTO</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ACTO II — SALTO SIN RED (PERÚ ✈️ ARGENTINA)
+         ========================================== -->
+    <section id="acto-2" class="story-act reverse-layout" data-chapter="acto-2">
+      <div class="act-container">
+        <div class="act-visual">
+          <div class="gta-poster-frame" data-poster>
+            <div class="svg-stage" set:html={scene03Svg} />
+            <div class="poster-prop-floating prop-bottom-left">
+              <VectorProps type="flight-route" />
+            </div>
+          </div>
+        </div>
+
+        <article class="act-card">
+          <div class="act-mission-tag">MISIÓN 02 • NUEVO MAPA DESBLOQUEADO</div>
+          <p class="act-location">📍 PERÚ ➔ BUENOS AIRES, ARGENTINA</p>
+          <h2 class="act-heading">SALTO SIN RED</h2>
+          <p class="act-narrative">
+            Cuando decidí venir a Argentina, no dudaste ni un segundo en armar las valijas y acompañarme. Porque para vos, donde está tu familia está tu trinchera.
+          </p>
+          <p class="act-narrative">
+            Lejos de quedarte quieta en un país nuevo, saliste a comerte la cancha: empezaste trabajando como <strong>Promotora de Salud</strong> y enseguida te pusiste una meta todavía más grande: estudiar <strong>Enfermería</strong> para transformar tu vocación de cuidar en tu profesión.
+          </p>
+          <div class="mission-reward-box">
+            <span class="reward-label">RECOMPENSA DE MISIÓN</span>
+            <span class="reward-value">VOCACIÓN DE SALUD • COMPAÑERA INCONDICIONAL</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ACTO III — INQUEBRANTABLE (OCTUBRE 2025 / ABANDERADA)
+         ========================================== -->
+    <section id="acto-3" class="story-act" data-chapter="acto-3">
+      <div class="act-container">
+        <div class="act-visual">
+          <div class="gta-poster-frame" data-poster>
+            <div class="svg-stage" set:html={scene04Svg} />
+            <div class="poster-prop-floating prop-bottom-right">
+              <VectorProps type="watch-s4" />
+            </div>
+          </div>
+        </div>
+
+        <article class="act-card">
+          <div class="act-mission-tag">MISIÓN 03 • OCTUBRE 2025</div>
+          <p class="act-location">📍 ACTO DE COLACIÓN • ABANDERADA DE HONOR</p>
+          <h2 class="act-heading">INQUEBRANTABLE</h2>
+          <p class="act-narrative">
+            A inicios del 2025 la vida intentó frenarte de golpe con un accidente y múltiples fracturas de cadera. Cualquier otra persona habría abandonado la carrera. Vos no.
+          </p>
+          <p class="act-narrative">
+            En octubre del 2025 fuimos juntos a buscar tu premio como <strong>Abanderada</strong> en silla de ruedas, y el cuatrimestre pasado te graduaste de Enfermera. En tu muñeca brillaba ese <strong>reloj dorado atardecer con su diamante</strong>, porque solo una joya así hace juego con una mujer que brilla hasta en los momentos más duros.
+          </p>
+          <div class="mission-reward-box">
+            <span class="reward-label">EQUIPAMIENTO ÉPICO</span>
+            <span class="reward-value">ABANDERADA + XIAOMI WATCH S4 DORADO ATARDECER</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         ACTO IV — LEVEL 58: CREANDO VIDA CON HILOS (AMIGURUMIS)
+         ========================================== -->
+    <section id="acto-4" class="story-act reverse-layout" data-chapter="acto-4">
+      <div class="act-container">
+        <div class="act-visual">
+          <div class="gta-poster-frame" data-poster>
+            <div class="svg-stage" set:html={scene05Svg} />
+            <div class="poster-prop-floating prop-top-right">
+              <VectorProps type="amigurumi-badge" />
+            </div>
+          </div>
+        </div>
+
+        <article class="act-card">
+          <div class="act-mission-tag">MISIÓN 04 • PRESENTE Y PRÓXIMO NIVEL</div>
+          <p class="act-location">📍 NIVEL 58 • ENTRE CROCHET Y LA LICENCIATURA</p>
+          <h2 class="act-heading">CREANDO VIDA CON HILOS</h2>
+          <p class="act-narrative">
+            Tu mente inquieta nunca descansa. Mientras esperás los papeles de la matrícula y la convalidación para arrancar el año que viene la <strong>Licenciatura en Enfermería</strong>, encontraste un nuevo arte en tus manos.
+          </p>
+          <p class="act-narrative">
+Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer. Porque hasta cuando descansás, tus manos siguen haciendo lo que mejor saben hacer: dar abrigo, forma y cariño punto por punto.
+          </p>
+          <div class="mission-reward-box">
+            <span class="reward-label">PRÓXIMA EXPANSIÓN</span>
+            <span class="reward-value">MAESTRA DEL CROCHET • FUTURA LICENCIADA</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         OUTRO — MISIÓN DE MAÑANA: CELEBRAR + CARTA PERSONAL
+         ========================================== -->
+    <section id="outro" class="outro-section" data-chapter="outro">
+      <div class="outro-Showcase">
+        <div class="gta-poster-frame landscape-frame" data-poster>
+          <div class="svg-stage" set:html={scene06Svg} />
+        </div>
+
+        <div class="act-card">
+          <div class="act-mission-tag">MISIÓN FINAL • DÍA DE LA MADRE</div>
+          <p class="act-location">📍 CON GERARDO Y FIBIO • MESA RESERVADA</p>
+          <h2 class="act-heading">MISIÓN: CELEBRAR JUNTOS</h2>
+          <p class="act-narrative">
+            Aunque en Perú se celebre en otra fecha, acá celebramos hoy y siempre la suerte inmensa de tenerte. Hoy no
+            hay ni trámites, ni exámenes: hoy salimos a comer los tres para brindar por vos.
+          </p>
+          <div class="mission-reward-box">
+            <span class="reward-label">ESTADO DE CAMPAÑA</span>
+            <span class="reward-value">100% COMPLETADO • MAMÁ LEYENDA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARTA / DEDICATORIA PERSONAL PARA CORINA -->
+      <article class="letter-envelope-card" id="carta-mama">
+        <div class="letter-seal">💌 CARTA ABIERTA PARA MAMÁ</div>
+        <h3 class="letter-greeting">Querida Mamá:</h3>
+
+        <div class="letter-body">
+          <p>
+            Si alguien me preguntara qué es la fuerza verdadera, no le hablaría de superhéroes de película: le contaría tu historia. Le contaría cómo en Perú, cuando a mi papá le dio el ACV y los médicos decían que no volvería a caminar, vos te plantaste contra todo pronóstico, hiciste oídos sordos a quienes te decían que bajes los brazos y no descansaste hasta verlo caminar de nuevo.
+          </p>
+          <p>
+            Le contaría que cuando me vine a Argentina no lo pensaste dos veces para venirte conmigo y empezar de cero. Que trabajaste como promotora de salud, que te pusiste a estudiar enfermería y que ni siquiera un accidente con múltiples fracturas de cadera pudo impedir que llegaras a ser <strong>Abanderada</strong>. Todavía me emociona acordarme de aquel octubre de 2025, yendo en silla de ruedas a recibir tu premio.
+          </p>
+          <p>
+            Hoy, a tus 58 años, recién graduada, esperando tu matrícula para ir por la Licenciatura el año que viene y llenando la casa de hilos, vinchas y amigurumis tejidos a crochet, me seguís enseñando todos los días que no existe obstáculo más grande que el amor de una madre.
+          </p>
+          <p>
+            Esta página web la hice para que cada vez que la abras —en tu celular, en la compu o en la tele— recuerdes lo gigante que sos para mí y para mi papá. Felíz día mamá. Prepárate que hoy te celebramos como lo que sos: <strong>nuestra protagonista y nuestra Leyenda</strong>.
+          </p>
+        </div>
+
+        <div class="letter-signature">
+          <div>
+            <p class="reward-label">CON TODO MI AMOR Y ORGULLO</p>
+            <p class="signature-name">Tu hijo, Gerardo</p>
+          </div>
+          <a href="#intro" class="gta-cta-btn">
+            <span>VOLVER A EMPEZAR</span>
+            <span aria-hidden="true">↑</span>
+          </a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import Lenis from 'lenis';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize Lenis smooth scrolling synced with GSAP ScrollTrigger
+    const lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      syncTouch: false,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Smooth anchor navigation for chapter dots and CTA buttons
+    document.querySelectorAll('a[href^="#"], .chapter-dot').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetSel = el.getAttribute('href') || el.getAttribute('data-target');
+        if (targetSel) {
+          lenis.scrollTo(targetSel, { duration: 1.25 });
+        }
+      });
+    });
+
+    // Responsive & Accessibility-aware GSAP animations via gsap.matchMedia()
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        isDesktop: '(min-width: 961px)',
+        isMobile: '(max-width: 960px)',
+        reduceMotion: '(prefers-reduced-motion: reduce)',
+      },
+      (context) => {
+        const { isDesktop, reduceMotion } = context.conditions as {
+          isDesktop: boolean;
+          isMobile: boolean;
+          reduceMotion: boolean;
+        };
+
+        if (reduceMotion) {
+          gsap.set('.stat-bar-fill, .act-card, [data-poster]', { clearProps: 'all' });
+          return;
+        }
+
+        // 1. Intro Hero Entrance Timeline
+        const introTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        introTl
+          .from('.gta-kicker', { y: -25, autoAlpha: 0, duration: 0.6 })
+          .from('.gta-main-title', { scale: 0.88, y: 30, autoAlpha: 0, duration: 0.8 }, '-=0.35')
+          .from('.gta-subtitle', { y: 20, autoAlpha: 0, duration: 0.6 }, '-=0.45')
+          .from('.stat-card', { y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.55 }, '-=0.35')
+          .from('.stat-bar-fill', { scaleX: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out' }, '-=0.4')
+          .from('#intro [data-poster]', { scale: 0.9, rotation: isDesktop ? 2.5 : 0, autoAlpha: 0, duration: 0.95 }, 0.15);
+
+        // 2. Multi-layer SVG Internal Parallax (Sky, Midground, Foreground/Ink)
+        const posters = gsap.utils.toArray<HTMLElement>('[data-poster]');
+        posters.forEach((poster) => {
+          const skyLayer = poster.querySelector('.svg-layer-sky');
+          const midLayer = poster.querySelector('.svg-layer-mid');
+          const fgLayer = poster.querySelector('.svg-layer-fg');
+
+          const parallaxTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: poster,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.8,
+            },
+          });
+
+          if (skyLayer) {
+            parallaxTl.fromTo(skyLayer, { yPercent: -4, scale: 1.05 }, { yPercent: 4, scale: 1.05, ease: 'none' }, 0);
+          }
+          if (midLayer) {
+            parallaxTl.fromTo(midLayer, { yPercent: -2, scale: 1.03 }, { yPercent: 2, scale: 1.03, ease: 'none' }, 0);
+          }
+          if (fgLayer) {
+            parallaxTl.fromTo(fgLayer, { yPercent: 3, scale: 1.02 }, { yPercent: -3, scale: 1.02, ease: 'none' }, 0);
+          }
+        });
+
+        // 3. Story Acts Entrance & Card Choreography
+        const acts = gsap.utils.toArray<HTMLElement>('.story-act');
+        acts.forEach((act) => {
+          const card = act.querySelector('.act-card');
+          const poster = act.querySelector('[data-poster]');
+          const prop = act.querySelector('.poster-prop-floating');
+
+          const actTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: act,
+              start: 'top 78%',
+              end: 'bottom 22%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+
+          if (poster) {
+            actTl.from(poster, {
+              y: isDesktop ? 60 : 35,
+              scale: 0.94,
+              autoAlpha: 0,
+              duration: 0.85,
+              ease: 'power3.out',
+            });
+          }
+
+          if (prop) {
+            actTl.from(
+              prop,
+              {
+                scale: 0.5,
+                y: 25,
+                autoAlpha: 0,
+                duration: 0.65,
+                ease: 'back.out(1.7)',
+              },
+              '-=0.45'
+            );
+          }
+
+          if (card) {
+            actTl.from(
+              card,
+              {
+                x: isDesktop ? 45 : 0,
+                y: isDesktop ? 20 : 35,
+                autoAlpha: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+              },
+              '-=0.55'
+            );
+          }
+        });
+
+        // 4. Interactive Vector Props Continuous Ambient Animations
+        // Diamond Sparkle on Xiaomi Watch S4
+        gsap.to('.diamond-sparkle', {
+          rotation: 180,
+          scale: 1.28,
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+
+        // ECG Heartbeat Line Pulse
+        gsap.fromTo(
+          '.ecg-line-path',
+          { strokeDasharray: 900, strokeDashoffset: 900 },
+          {
+            strokeDashoffset: 0,
+            duration: 2.8,
+            repeat: -1,
+            ease: 'power1.inOut',
+          }
+        );
+
+        // Amigurumi Floating Bounce
+        gsap.to('.amigurumi-svg', {
+          y: -10,
+          rotation: 4,
+          duration: 2.0,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+
+        // 5. Dedication Letter Reveal
+        gsap.from('#carta-mama', {
+          y: 50,
+          scale: 0.96,
+          autoAlpha: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '#carta-mama',
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+
+        // 6. Active Chapter Navigation Indicator
+        const sections = gsap.utils.toArray<HTMLElement>('section[id]');
+        const navDots = gsap.utils.toArray<HTMLElement>('.chapter-dot');
+
+        sections.forEach((section, index) => {
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top center',
+            end: 'bottom center',
+            onToggle: (self) => {
+              if (self.isActive && navDots[index]) {
+                navDots.forEach((d) => d.classList.remove('is-active'));
+                navDots[index].classList.add('is-active');
+              }
+            },
+          });
+        });
+      }
+    );
+  </script>
+</BaseLayout>

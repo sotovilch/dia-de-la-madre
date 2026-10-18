@@ -1,0 +1,167 @@
+---
+/**
+ * Pure vector interactive props and overlays for each GTA: MAMÁ (CORINA) chapter.
+ * Rendered directly in the DOM so GSAP can animate individual SVG paths, strokes, and glows.
+ */
+interface Props {
+  type: 'watch-s4' | 'ecg-monitor' | 'flight-route' | 'amigurumi-badge' | 'gta-star-rating';
+}
+
+const { type } = Astro.props;
+---
+
+{type === 'watch-s4' && (
+  <svg viewBox="0 0 260 260" class="prop-svg watch-s4-svg" aria-label="Xiaomi Watch S4 Sunset Gold Edition with Diamond">
+    <defs>
+      <linearGradient id="sunset-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fff0c2" />
+        <stop offset="35%" stop-color="#f6c467" />
+        <stop offset="70%" stop-color="#d4933b" />
+        <stop offset="100%" stop-color="#8c5416" />
+      </linearGradient>
+      <radialGradient id="watch-dial" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#2b163d" />
+        <stop offset="100%" stop-color="#0d0614" />
+      </radialGradient>
+      <filter id="diamond-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <!-- Milanese / Sunset Gold Strap -->
+    <path d="M95 15 L165 15 L172 70 L88 70 Z" fill="url(#sunset-gold)" stroke="#12071c" stroke-width="4" />
+    <path d="M88 190 L172 190 L165 245 L95 245 Z" fill="url(#sunset-gold)" stroke="#12071c" stroke-width="4" />
+    <!-- Rotating Crown -->
+    <rect x="202" y="114" width="14" height="32" rx="4" fill="url(#sunset-gold)" stroke="#12071c" stroke-width="4" />
+    <!-- Outer Gold Bezel -->
+    <circle cx="130" cy="130" r="76" fill="url(#sunset-gold)" stroke="#12071c" stroke-width="5" />
+    <circle cx="130" cy="130" r="64" fill="url(#watch-dial)" stroke="#f6c467" stroke-width="2" />
+    <!-- Hour Markers -->
+    <g stroke="#f6c467" stroke-width="3" stroke-linecap="round">
+      <line x1="130" y1="74" x2="130" y2="82" />
+      <line x1="130" y1="178" x2="130" y2="186" />
+      <line x1="74" y1="130" x2="82" y2="130" />
+      <line x1="178" y1="130" x2="186" y2="130" />
+    </g>
+    <!-- Heart / Nurse Icon on Watch Face -->
+    <path d="M130 105 C125 98, 114 98, 114 107 C114 114, 130 123, 130 123 C130 123, 146 114, 146 107 C146 98, 135 98, 130 105 Z" fill="#e08be8" />
+    <!-- Watch Hands -->
+    <line class="watch-hand-hour" x1="130" y1="130" x2="108" y2="112" stroke="#fff0c2" stroke-width="4.5" stroke-linecap="round" />
+    <line class="watch-hand-min" x1="130" y1="130" x2="162" y2="106" stroke="#f6c467" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="130" cy="130" r="5" fill="#fff0c2" />
+    <!-- Diamond Accent at Top Bezel + Animated Sparkle Star -->
+    <polygon points="130,56 138,64 130,72 122,64" fill="#ffffff" stroke="#b9f2ff" stroke-width="2" filter="url(#diamond-glow)" />
+    <g class="diamond-sparkle" transform="translate(130, 64)">
+      <path d="M0 -24 L4 -5 L24 0 L4 5 L0 24 L-4 5 L-24 0 L-4 -5 Z" fill="#ffffff" filter="url(#diamond-glow)" />
+      <circle cx="0" cy="0" r="5" fill="#e6ffff" />
+    </g>
+  </svg>
+)}
+
+{type === 'ecg-monitor' && (
+  <svg viewBox="0 0 500 110" class="prop-svg ecg-svg" aria-label="Heart Recovery Monitor">
+    <defs>
+      <linearGradient id="ecg-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#b983ff" stop-opacity="0.2" />
+        <stop offset="50%" stop-color="#df9cff" stop-opacity="1" />
+        <stop offset="100%" stop-color="#f7c873" stop-opacity="1" />
+      </linearGradient>
+    </defs>
+    <rect x="2" y="2" width="496" height="106" rx="12" fill="#140921" fill-opacity="0.88" stroke="#b983ff" stroke-width="2" />
+    <!-- Grid lines -->
+    <g stroke="#391e54" stroke-width="1" opacity="0.6">
+      <line x1="0" y1="27" x2="500" y2="27" />
+      <line x1="0" y1="55" x2="500" y2="55" />
+      <line x1="0" y1="82" x2="500" y2="82" />
+      <line x1="100" y1="0" x2="100" y2="110" />
+      <line x1="200" y1="0" x2="200" y2="110" />
+      <line x1="300" y1="0" x2="300" y2="110" />
+      <line x1="400" y1="0" x2="400" y2="110" />
+    </g>
+    <!-- Animated ECG Waveform -->
+    <path
+      class="ecg-line-path"
+      d="M 15 60 L 85 60 L 100 45 L 112 65 L 126 60 L 155 60 L 168 78 L 182 14 L 196 92 L 210 50 L 225 60 L 295 60 L 310 45 L 322 65 L 336 60 L 365 60 L 378 78 L 392 14 L 406 92 L 420 50 L 435 60 L 485 60"
+      fill="none"
+      stroke="url(#ecg-grad)"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+)}
+
+{type === 'flight-route' && (
+  <svg viewBox="0 0 520 130" class="prop-svg flight-svg" aria-label="Ruta Perú a Argentina">
+    <rect x="2" y="2" width="516" height="126" rx="14" fill="#160a24" fill-opacity="0.88" stroke="#f7b267" stroke-width="2" />
+    <!-- Origin Pin: Perú -->
+    <circle cx="65" cy="85" r="9" fill="#ff6b8b" stroke="#12071c" stroke-width="3" />
+    <text x="65" y="114" text-anchor="middle" fill="#ffe6f0" font-size="14" font-weight="800" letter-spacing="1">PERÚ</text>
+    <!-- Destination Pin: Argentina -->
+    <circle cx="455" cy="85" r="9" fill="#75c9ff" stroke="#12071c" stroke-width="3" />
+    <text x="455" y="114" text-anchor="middle" fill="#e3f4ff" font-size="14" font-weight="800" letter-spacing="1">ARGENTINA</text>
+    <!-- Curved Flight Trajectory -->
+    <path
+      class="flight-arc-path"
+      d="M 74 82 Q 260 5 446 82"
+      fill="none"
+      stroke="#f7c873"
+      stroke-width="4"
+      stroke-dasharray="8 8"
+      stroke-linecap="round"
+    />
+    <!-- Airplane Vector Icon -->
+    <g class="flight-plane-icon" transform="translate(260, 42)">
+      <path d="M-16,-6 L18,0 L-16,6 L-10,0 Z" fill="#fff0c2" stroke="#12071c" stroke-width="2" />
+    </g>
+  </svg>
+)}
+
+{type === 'amigurumi-badge' && (
+  <svg viewBox="0 0 220 220" class="prop-svg amigurumi-svg" aria-label="Amigurumi Crochet">
+    <defs>
+      <radialGradient id="yarn-pastel" cx="35%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#f3d1ff" />
+        <stop offset="55%" stop-color="#b983ff" />
+        <stop offset="100%" stop-color="#6b3fa0" />
+      </radialGradient>
+    </defs>
+    <!-- Ears -->
+    <circle cx="62" cy="58" r="26" fill="url(#yarn-pastel)" stroke="#12071c" stroke-width="5" />
+    <circle cx="62" cy="58" r="13" fill="#f7b267" />
+    <circle cx="158" cy="58" r="26" fill="url(#yarn-pastel)" stroke="#12071c" stroke-width="5" />
+    <circle cx="158" cy="58" r="13" fill="#f7b267" />
+    <!-- Head with Crochet Stitch Texture -->
+    <circle cx="110" cy="115" r="68" fill="url(#yarn-pastel)" stroke="#12071c" stroke-width="5" />
+    <path d="M62 95 Q110 82 158 95" fill="none" stroke="#4a2574" stroke-width="2.5" stroke-dasharray="6 6" />
+    <path d="M55 135 Q110 148 165 135" fill="none" stroke="#4a2574" stroke-width="2.5" stroke-dasharray="6 6" />
+    <!-- Cute Eyes & Snout -->
+    <circle cx="84" cy="110" r="8" fill="#12071c" />
+    <circle cx="81" cy="107" r="3" fill="#ffffff" />
+    <circle cx="136" cy="110" r="8" fill="#12071c" />
+    <circle cx="133" cy="107" r="3" fill="#ffffff" />
+    <ellipse cx="110" cy="128" rx="22" ry="16" fill="#ffe6f7" stroke="#12071c" stroke-width="4" />
+    <ellipse cx="110" cy="123" rx="7" ry="5" fill="#6b3fa0" />
+    <path d="M103 132 Q110 138 117 132" fill="none" stroke="#12071c" stroke-width="3.5" stroke-linecap="round" />
+    <!-- Crochet Hook Crossing Behind -->
+    <line x1="22" y1="195" x2="198" y2="25" stroke="#f6c467" stroke-width="8" stroke-linecap="round" />
+  </svg>
+)}
+
+{type === 'gta-star-rating' && (
+  <svg viewBox="0 0 230 42" class="prop-svg stars-svg" aria-label="5 Estrellas de Leyenda">
+    {[0, 1, 2, 3, 4].map((i) => (
+      <polygon
+        class="gta-star"
+        transform={`translate(${i * 45 + 6}, 3)`}
+        points="18,2 23,13 35,14 26,22 29,34 18,28 7,34 10,22 1,14 13,13"
+        fill="#f7c873"
+        stroke="#12071c"
+        stroke-width="2.5"
+      />
+    ))}
+  </svg>
+)}
