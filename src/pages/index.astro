@@ -239,10 +239,60 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
         </div>
       </div>
 
-      <!-- CARTA / DEDICATORIA PERSONAL PARA CORINA -->
-      <article class="letter-envelope-card" id="carta-mama">
-        <div class="letter-seal">💌 CARTA ABIERTA PARA MAMÁ</div>
-        <h3 class="letter-greeting">Querida Mamá:</h3>
+      <!-- CARTA / DEDICATORIA PERSONAL PARA CORINA: SOBRE INTERACTIVO -->
+      <section class="letter-envelope-section" id="carta-mama">
+        <div class="envelope-wrapper">
+          <div class="envelope-badge-tag">💌 RECOMPENSA FINAL DE CAMPAÑA</div>
+          <h3 class="envelope-section-title">UNA CARTA SECRETA PARA VOS</h3>
+          <p class="envelope-section-subtitle">
+            Misión cumplida, Mamá. Hay un mensaje personal que solo podés abrir vos:
+          </p>
+
+          <button id="open-envelope-btn" class="gta-envelope-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="letter-modal" aria-label="Abrir carta para mamá">
+            <div class="envelope-mockup" id="envelope-mockup">
+              <div class="env-back"></div>
+              
+              <div class="env-letter-sheet">
+                <div class="env-sheet-line"></div>
+                <div class="env-sheet-line short"></div>
+                <span class="env-sheet-preview">Querida Mamá...</span>
+              </div>
+              
+              <div class="env-pocket"></div>
+              <div class="env-flap"></div>
+              
+              <div class="env-wax-seal">
+                <div class="seal-glow-ring"></div>
+                <span class="seal-heart">💌</span>
+                <span class="seal-text">ABRIR</span>
+              </div>
+            </div>
+
+            <div class="envelope-cta-label">
+              <span class="cta-pulse-dot" aria-hidden="true"></span>
+              <span class="cta-text">TOCÁ EL SOBRE PARA ABRIR LA CARTA</span>
+              <span class="cta-icon" aria-hidden="true">✨</span>
+            </div>
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- MODAL DE LECTURA INMERSIVA: CARTA DE GERARDO -->
+  <div id="letter-modal" class="letter-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-letter-title">
+    <div class="letter-modal-backdrop" id="letter-modal-backdrop"></div>
+    
+    <div class="letter-modal-container">
+      <header class="letter-modal-header">
+        <div class="letter-seal-badge">💌 CARTA ABIERTA PARA MAMÁ</div>
+        <button id="close-letter-btn" class="letter-close-btn" type="button" aria-label="Cerrar carta">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </header>
+
+      <div class="letter-modal-content">
+        <h3 id="modal-letter-title" class="letter-greeting">Querida Mamá:</h3>
 
         <div class="letter-body">
           <p>
@@ -259,19 +309,22 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
           </p>
         </div>
 
-        <div class="letter-signature">
-          <div>
+        <footer class="letter-signature">
+          <div class="signature-block">
             <p class="reward-label">CON TODO MI AMOR Y ORGULLO</p>
             <p class="signature-name">Tu hijo, Gerardo</p>
           </div>
-          <a href="#intro" class="gta-cta-btn">
-            <span>VOLVER A EMPEZAR</span>
-            <span aria-hidden="true">↑</span>
-          </a>
-        </div>
-      </article>
-    </section>
-  </main>
+          
+          <div class="letter-actions">
+            <button id="modal-restart-btn" class="gta-cta-btn" type="button">
+              <span>VOLVER AL INICIO</span>
+              <span aria-hidden="true">↑</span>
+            </button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
 
   <script>
     import gsap from 'gsap';
@@ -488,7 +541,16 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
           }
         );
 
-        // 4. Dedication Letter Reveal
+        // F. Wax seal ambient pulse on closed envelope
+        gsap.to('.seal-glow-ring', {
+          scale: 1.45,
+          opacity: 0,
+          duration: 1.6,
+          repeat: -1,
+          ease: 'power2.out',
+        });
+
+        // 4. Dedication Letter Envelope Reveal
         gsap.from('#carta-mama', {
           y: 40,
           scale: 0.98,
@@ -521,5 +583,81 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
         });
       }
     );
+
+    // ==========================================
+    // ENVELOPE OPENING & READING MODAL CONTROLLER
+    // ==========================================
+    const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+    const letterModal = document.getElementById('letter-modal');
+    const letterModalBackdrop = document.getElementById('letter-modal-backdrop');
+    const closeLetterBtn = document.getElementById('close-letter-btn');
+    const modalRestartBtn = document.getElementById('modal-restart-btn');
+    const envelopeMockup = document.getElementById('envelope-mockup');
+
+    let isEnvelopeOpening = false;
+
+    function openLetterModal() {
+      if (isEnvelopeOpening) return;
+      isEnvelopeOpening = true;
+
+      // 1. Trigger flap flip & letter peek animation
+      envelopeMockup?.classList.add('is-open');
+      openEnvelopeBtn?.setAttribute('aria-expanded', 'true');
+
+      // 2. Short pause for opening gesture, then reveal modal
+      window.setTimeout(() => {
+        letterModal?.classList.add('is-active');
+        letterModal?.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-locked');
+        lenis.stop();
+
+        closeLetterBtn?.focus();
+
+        gsap.fromTo(
+          '.letter-modal-container',
+          { scale: 0.9, y: 30, opacity: 0 },
+          { scale: 1, y: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
+        );
+
+        isEnvelopeOpening = false;
+      }, 420);
+    }
+
+    function closeLetterModal() {
+      gsap.to('.letter-modal-container', {
+        scale: 0.94,
+        y: 20,
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in',
+        onComplete: () => {
+          letterModal?.classList.remove('is-active');
+          letterModal?.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-locked');
+          lenis.start();
+
+          envelopeMockup?.classList.remove('is-open');
+          openEnvelopeBtn?.setAttribute('aria-expanded', 'false');
+          openEnvelopeBtn?.focus();
+        },
+      });
+    }
+
+    openEnvelopeBtn?.addEventListener('click', openLetterModal);
+    closeLetterBtn?.addEventListener('click', closeLetterModal);
+    letterModalBackdrop?.addEventListener('click', closeLetterModal);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && letterModal?.classList.contains('is-active')) {
+        closeLetterModal();
+      }
+    });
+
+    modalRestartBtn?.addEventListener('click', () => {
+      closeLetterModal();
+      window.setTimeout(() => {
+        lenis.scrollTo('#intro', { duration: 1.4 });
+      }, 260);
+    });
   </script>
 </BaseLayout>
