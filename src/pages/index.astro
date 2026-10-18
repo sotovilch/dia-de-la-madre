@@ -250,22 +250,71 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
 
           <button id="open-envelope-btn" class="gta-envelope-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="letter-modal" aria-label="Abrir carta para mamá">
             <div class="envelope-mockup" id="envelope-mockup">
-              <div class="env-back"></div>
-              
-              <div class="env-letter-sheet">
-                <div class="env-sheet-line"></div>
-                <div class="env-sheet-line short"></div>
-                <span class="env-sheet-preview">Querida Mamá...</span>
-              </div>
-              
-              <div class="env-pocket"></div>
-              <div class="env-flap"></div>
-              
-              <div class="env-wax-seal">
-                <div class="seal-glow-ring"></div>
-                <span class="seal-heart">💌</span>
-                <span class="seal-text">ABRIR</span>
-              </div>
+              <svg viewBox="0 0 520 340" class="envelope-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="env-grad-body" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2d1245" />
+                    <stop offset="60%" stop-color="#1c0a2d" />
+                    <stop offset="100%" stop-color="#12051f" />
+                  </linearGradient>
+                  <linearGradient id="env-grad-flap" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#3e195e" />
+                    <stop offset="100%" stop-color="#260e3b" />
+                  </linearGradient>
+                  <linearGradient id="env-grad-gold" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ffd56b" />
+                    <stop offset="50%" stop-color="#f6c467" />
+                    <stop offset="100%" stop-color="#c98a2c" />
+                  </linearGradient>
+                  <radialGradient id="env-wax-grad" cx="40%" cy="35%" r="65%">
+                    <stop offset="0%" stop-color="#ff7b89" />
+                    <stop offset="45%" stop-color="#e63946" />
+                    <stop offset="85%" stop-color="#9d0208" />
+                    <stop offset="100%" stop-color="#590d22" />
+                  </radialGradient>
+                  <filter id="env-shadow" x="-10%" y="-10%" width="130%" height="130%">
+                    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.75" />
+                  </filter>
+                </defs>
+
+                <g filter="url(#env-shadow)">
+                  <rect x="20" y="20" width="480" height="300" rx="18" fill="url(#env-grad-body)" stroke="#12071c" stroke-width="5" />
+                  <rect x="28" y="28" width="464" height="284" rx="12" fill="none" stroke="url(#env-grad-gold)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85" />
+                  
+                  <path d="M 38 52 L 38 38 L 52 38" fill="none" stroke="url(#env-grad-gold)" stroke-width="3" stroke-linecap="round" />
+                  <path d="M 482 52 L 482 38 L 468 38" fill="none" stroke="url(#env-grad-gold)" stroke-width="3" stroke-linecap="round" />
+                  <path d="M 38 288 L 38 302 L 52 302" fill="none" stroke="url(#env-grad-gold)" stroke-width="3" stroke-linecap="round" />
+                  <path d="M 482 288 L 482 302 L 468 302" fill="none" stroke="url(#env-grad-gold)" stroke-width="3" stroke-linecap="round" />
+
+                  <g class="env-svg-letter">
+                    <rect x="52" y="36" width="416" height="150" rx="8" fill="#fffdfa" stroke="#12071c" stroke-width="3" />
+                    <line x1="80" y1="65" x2="280" y2="65" stroke="#4a2574" stroke-width="3.5" stroke-linecap="round" opacity="0.4" />
+                    <line x1="80" y1="85" x2="380" y2="85" stroke="#4a2574" stroke-width="2.5" stroke-linecap="round" opacity="0.25" />
+                    <line x1="80" y1="102" x2="330" y2="102" stroke="#4a2574" stroke-width="2.5" stroke-linecap="round" opacity="0.25" />
+                    <text x="80" y="136" font-family="'Playfair Display', serif" font-style="italic" font-weight="600" font-size="20" fill="#2d1245">Querida Mamá: ...</text>
+                  </g>
+
+                  <path d="M 20 320 L 260 175 L 500 320 Z" fill="#230c38" stroke="#12071c" stroke-width="4" />
+                  <path d="M 20 20 L 260 175 L 20 320 Z" fill="#291040" stroke="#12071c" stroke-width="4" />
+                  <path d="M 500 20 L 260 175 L 500 320 Z" fill="#250d3a" stroke="#12071c" stroke-width="4" />
+
+                  <g class="env-svg-flap">
+                    <path d="M 20 20 L 500 20 L 260 185 Z" fill="url(#env-grad-flap)" stroke="#12071c" stroke-width="4.5" />
+                    <path d="M 40 24 L 480 24 L 260 176 Z" fill="none" stroke="url(#env-grad-gold)" stroke-width="2" opacity="0.8" />
+                  </g>
+
+                  <rect x="140" y="240" width="240" height="36" rx="18" fill="url(#env-grad-gold)" stroke="#12071c" stroke-width="3" />
+                  <text x="260" y="264" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="19" letter-spacing="2" fill="#12071c">CONFIDENCIAL • PARA MAMÁ</text>
+
+                  <g class="env-svg-seal">
+                    <circle class="seal-glow-ring" cx="260" cy="185" r="44" fill="none" stroke="url(#env-grad-gold)" stroke-width="3" opacity="0.8" />
+                    <circle cx="260" cy="185" r="36" fill="url(#env-wax-grad)" stroke="#12071c" stroke-width="4" />
+                    <circle cx="260" cy="185" r="31" fill="none" stroke="#ffb3ba" stroke-width="1.5" opacity="0.6" />
+                    <path d="M 260 174 C 255 165, 241 165, 241 176 C 241 186, 260 199, 260 199 C 260 199, 279 186, 279 176 C 279 165, 265 165, 260 174 Z" fill="url(#env-grad-gold)" stroke="#590d22" stroke-width="1.5" />
+                    <text x="260" y="211" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="800" font-size="9" letter-spacing="1" fill="#ffe6ea">TOCÁ AQUÍ</text>
+                  </g>
+                </g>
+              </svg>
             </div>
 
             <div class="envelope-cta-label">
