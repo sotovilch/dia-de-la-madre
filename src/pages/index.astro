@@ -329,10 +329,18 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
   </main>
 
   <!-- MODAL DE LECTURA INMERSIVA: CARTA DE GERARDO -->
-  <div id="letter-modal" class="letter-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-letter-title">
+  <div
+    id="letter-modal"
+    class="letter-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="modal-letter-title"
+    data-lenis-prevent
+  >
     <div class="letter-modal-backdrop" id="letter-modal-backdrop"></div>
     
-    <div class="letter-modal-container">
+    <div class="letter-modal-container" data-lenis-prevent>
       <header class="letter-modal-header">
         <div class="letter-seal-badge">💌 CARTA ABIERTA PARA MAMÁ</div>
         <button id="close-letter-btn" class="letter-close-btn" type="button" aria-label="Cerrar carta">
@@ -340,7 +348,7 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
         </button>
       </header>
 
-      <div class="letter-modal-content">
+      <div class="letter-modal-content" data-lenis-prevent data-lenis-prevent-touch>
         <h3 id="modal-letter-title" class="letter-greeting">Querida Mamá:</h3>
 
         <div class="letter-body">
@@ -388,6 +396,11 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
       duration: 1.15,
       smoothWheel: true,
       syncTouch: false,
+      prevent: (node) =>
+        node instanceof HTMLElement &&
+        (node.id === 'letter-modal' ||
+          node.closest('#letter-modal') !== null ||
+          node.hasAttribute('data-lenis-prevent')),
     });
 
     lenis.on('scroll', ScrollTrigger.update);
@@ -701,6 +714,19 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
         closeLetterModal();
       }
     });
+
+    const modalContent = document.querySelector('.letter-modal-content');
+    if (modalContent) {
+      ['touchstart', 'touchmove', 'touchend'].forEach((eventType) => {
+        modalContent.addEventListener(
+          eventType,
+          (e) => {
+            e.stopPropagation();
+          },
+          { passive: true }
+        );
+      });
+    }
 
     modalRestartBtn?.addEventListener('click', () => {
       closeLetterModal();
