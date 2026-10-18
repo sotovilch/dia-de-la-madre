@@ -98,11 +98,13 @@ const { type } = Astro.props;
   <svg viewBox="0 0 520 130" class="prop-svg flight-svg" aria-label="Ruta Perú a Argentina">
     <rect x="2" y="2" width="516" height="126" rx="14" fill="#160a24" fill-opacity="0.88" stroke="#f7b267" stroke-width="2" />
     <!-- Origin Pin: Perú -->
-    <circle cx="65" cy="85" r="9" fill="#ff6b8b" stroke="#12071c" stroke-width="3" />
-    <text x="65" y="114" text-anchor="middle" fill="#ffe6f0" font-size="14" font-weight="800" letter-spacing="1">PERÚ</text>
+    <circle class="pin-pulse pin-pulse-peru" cx="65" cy="85" r="9" fill="none" stroke="#ff6b8b" stroke-width="2.5" opacity="0.8" />
+    <circle class="pin-dot pin-peru-dot" cx="65" cy="85" r="9" fill="#ff6b8b" stroke="#12071c" stroke-width="3" />
+    <text class="pin-text pin-peru-text" x="65" y="114" text-anchor="middle" fill="#ffe6f0" font-size="14" font-weight="800" letter-spacing="1">PERÚ</text>
     <!-- Destination Pin: Argentina -->
-    <circle cx="455" cy="85" r="9" fill="#75c9ff" stroke="#12071c" stroke-width="3" />
-    <text x="455" y="114" text-anchor="middle" fill="#e3f4ff" font-size="14" font-weight="800" letter-spacing="1">ARGENTINA</text>
+    <circle class="pin-pulse pin-pulse-arg" cx="455" cy="85" r="9" fill="none" stroke="#75c9ff" stroke-width="2.5" opacity="0.8" />
+    <circle class="pin-dot pin-arg-dot" cx="455" cy="85" r="9" fill="#75c9ff" stroke="#12071c" stroke-width="3" />
+    <text class="pin-text pin-arg-text" x="455" y="114" text-anchor="middle" fill="#e3f4ff" font-size="14" font-weight="800" letter-spacing="1">ARGENTINA</text>
     <!-- Curved Flight Trajectory -->
     <path
       class="flight-arc-path"
@@ -114,7 +116,7 @@ const { type } = Astro.props;
       stroke-linecap="round"
     />
     <!-- Airplane Vector Icon -->
-    <g class="flight-plane-icon" transform="translate(260, 42)">
+    <g class="flight-plane-icon">
       <path d="M-16,-6 L18,0 L-16,6 L-10,0 Z" fill="#fff0c2" stroke="#12071c" stroke-width="2" />
     </g>
   </svg>

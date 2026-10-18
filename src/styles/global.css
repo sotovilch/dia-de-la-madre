@@ -311,12 +311,7 @@ body {
   width: 100%;
   height: 100%;
   display: block;
-}
-
-.svg-layer-sky,
-.svg-layer-mid,
-.svg-layer-fg {
-  will-change: transform;
+  pointer-events: none;
 }
 
 /* Floating Prop Overlay inside Poster Frame */

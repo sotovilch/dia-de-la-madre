@@ -276,9 +276,10 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
   <script>
     import gsap from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
     import Lenis from 'lenis';
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
     // Initialize Lenis smooth scrolling synced with GSAP ScrollTrigger
     const lenis = new Lenis({
@@ -333,36 +334,9 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
           .from('.gta-subtitle', { y: 20, autoAlpha: 0, duration: 0.6 }, '-=0.45')
           .from('.stat-card', { y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.55 }, '-=0.35')
           .from('.stat-bar-fill', { scaleX: 0, stagger: 0.1, duration: 0.9, ease: 'expo.out' }, '-=0.4')
-          .from('#intro [data-poster]', { scale: 0.9, rotation: isDesktop ? 2.5 : 0, autoAlpha: 0, duration: 0.95 }, 0.15);
+          .from('#intro [data-poster]', { autoAlpha: 0, duration: 0.8 }, 0.15);
 
-        // 2. Multi-layer SVG Internal Parallax (Sky, Midground, Foreground/Ink)
-        const posters = gsap.utils.toArray<HTMLElement>('[data-poster]');
-        posters.forEach((poster) => {
-          const skyLayer = poster.querySelector('.svg-layer-sky');
-          const midLayer = poster.querySelector('.svg-layer-mid');
-          const fgLayer = poster.querySelector('.svg-layer-fg');
-
-          const parallaxTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: poster,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 0.8,
-            },
-          });
-
-          if (skyLayer) {
-            parallaxTl.fromTo(skyLayer, { yPercent: -4, scale: 1.05 }, { yPercent: 4, scale: 1.05, ease: 'none' }, 0);
-          }
-          if (midLayer) {
-            parallaxTl.fromTo(midLayer, { yPercent: -2, scale: 1.03 }, { yPercent: 2, scale: 1.03, ease: 'none' }, 0);
-          }
-          if (fgLayer) {
-            parallaxTl.fromTo(fgLayer, { yPercent: 3, scale: 1.02 }, { yPercent: -3, scale: 1.02, ease: 'none' }, 0);
-          }
-        });
-
-        // 3. Story Acts Entrance & Card Choreography
+        // 2. Story Acts Entrance & Card Choreography (Posters remain rock-solid and static)
         const acts = gsap.utils.toArray<HTMLElement>('.story-act');
         acts.forEach((act) => {
           const card = act.querySelector('.act-card');
@@ -380,11 +354,9 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
 
           if (poster) {
             actTl.from(poster, {
-              y: isDesktop ? 60 : 35,
-              scale: 0.94,
               autoAlpha: 0,
-              duration: 0.85,
-              ease: 'power3.out',
+              duration: 0.65,
+              ease: 'power2.out',
             });
           }
 
@@ -392,13 +364,12 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
             actTl.from(
               prop,
               {
-                scale: 0.5,
-                y: 25,
+                scale: 0.6,
                 autoAlpha: 0,
                 duration: 0.65,
                 ease: 'back.out(1.7)',
               },
-              '-=0.45'
+              '-=0.4'
             );
           }
 
@@ -417,45 +388,112 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
           }
         });
 
-        // 4. Interactive Vector Props Continuous Ambient Animations
-        // Diamond Sparkle on Xiaomi Watch S4
+        // 3. Interactive Vector Props Continuous Ambient Animations (Desktop, PC, TV, Mobile)
+        // A. Xiaomi Watch S4: diamond sparkle + rotating clock hands
         gsap.to('.diamond-sparkle', {
           rotation: 180,
-          scale: 1.28,
+          scale: 1.3,
+          transformOrigin: 'center center',
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+        gsap.to('.watch-hand-min', {
+          rotation: 360,
+          transformOrigin: '130px 130px',
+          duration: 12,
+          repeat: -1,
+          ease: 'none',
+        });
+        gsap.to('.watch-hand-hour', {
+          rotation: 360,
+          transformOrigin: '130px 130px',
+          duration: 72,
+          repeat: -1,
+          ease: 'none',
+        });
+
+        // B. ECG Heartbeat Line Pulse
+        gsap.fromTo(
+          '.ecg-line-path',
+          { strokeDasharray: 900, strokeDashoffset: 900 },
+          {
+            strokeDashoffset: 0,
+            duration: 2.6,
+            repeat: -1,
+            ease: 'power1.inOut',
+          }
+        );
+
+        // C. Amigurumi Crochet Bear Floating Bounce
+        gsap.to('.amigurumi-svg', {
+          y: -12,
+          rotation: 5,
+          transformOrigin: 'top center',
           duration: 2.2,
           repeat: -1,
           yoyo: true,
           ease: 'sine.inOut',
         });
 
-        // ECG Heartbeat Line Pulse
-        gsap.fromTo(
-          '.ecg-line-path',
-          { strokeDasharray: 900, strokeDashoffset: 900 },
-          {
-            strokeDashoffset: 0,
-            duration: 2.8,
-            repeat: -1,
-            ease: 'power1.inOut',
-          }
-        );
-
-        // Amigurumi Floating Bounce
-        gsap.to('.amigurumi-svg', {
-          y: -10,
-          rotation: 4,
-          duration: 2.0,
+        // D. Perú -> Argentina Flight Route & Airplane Trajectory
+        gsap.to('.flight-arc-path', {
+          strokeDashoffset: -32,
+          duration: 1.2,
+          repeat: -1,
+          ease: 'none',
+        });
+        gsap.to('.flight-plane-icon', {
+          motionPath: {
+            path: '.flight-arc-path',
+            align: '.flight-arc-path',
+            autoRotate: true,
+            alignOrigin: [0.5, 0.5],
+          },
+          duration: 3.8,
+          repeat: -1,
+          ease: 'power1.inOut',
+        });
+        gsap.to('.pin-pulse', {
+          r: 24,
+          opacity: 0,
+          duration: 1.8,
+          repeat: -1,
+          ease: 'power2.out',
+          stagger: 0.9,
+        });
+        gsap.to('.pin-dot', {
+          scale: 1.25,
+          transformOrigin: 'center center',
+          duration: 1.2,
           repeat: -1,
           yoyo: true,
           ease: 'sine.inOut',
         });
 
-        // 5. Dedication Letter Reveal
+        // E. GTA Legend 5 Stars Shimmer
+        gsap.fromTo(
+          '.gta-star',
+          { scale: 0.92, opacity: 0.8 },
+          {
+            scale: 1.08,
+            opacity: 1,
+            transformOrigin: 'center center',
+            duration: 1.2,
+            repeat: -1,
+            yoyo: true,
+            stagger: 0.15,
+            ease: 'sine.inOut',
+          }
+        );
+
+        // 4. Dedication Letter Reveal
         gsap.from('#carta-mama', {
-          y: 50,
-          scale: 0.96,
+          y: 40,
+          scale: 0.98,
           autoAlpha: 0,
-          duration: 0.9,
+          duration: 0.85,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: '#carta-mama',
@@ -464,7 +502,7 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
           },
         });
 
-        // 6. Active Chapter Navigation Indicator
+        // 5. Active Chapter Navigation Indicator
         const sections = gsap.utils.toArray<HTMLElement>('section[id]');
         const navDots = gsap.utils.toArray<HTMLElement>('.chapter-dot');
 
