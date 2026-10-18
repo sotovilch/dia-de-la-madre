@@ -420,26 +420,19 @@ Entre <strong>ovillos de color y agujas de crochet</strong>, te lanzaste a tejer
       });
     });
 
-    // Responsive & Accessibility-aware GSAP animations via gsap.matchMedia()
+    // Responsive GSAP animations via gsap.matchMedia()
     const mm = gsap.matchMedia();
 
     mm.add(
       {
         isDesktop: '(min-width: 961px)',
         isMobile: '(max-width: 960px)',
-        reduceMotion: '(prefers-reduced-motion: reduce)',
       },
       (context) => {
-        const { isDesktop, reduceMotion } = context.conditions as {
+        const { isDesktop } = context.conditions as {
           isDesktop: boolean;
           isMobile: boolean;
-          reduceMotion: boolean;
         };
-
-        if (reduceMotion) {
-          gsap.set('.stat-bar-fill, .act-card, [data-poster]', { clearProps: 'all' });
-          return;
-        }
 
         // 1. Intro Hero Entrance Timeline
         const introTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
